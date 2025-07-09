@@ -82,7 +82,7 @@ Optional but recommended:
     ```bash
     ssh-keygen -t ed25519
     ```
-># Target path: ~/.ssh/dso/dso_ed25519
+> Target path: ~/.ssh/dso/dso_ed25519
 
 ---
 
@@ -94,8 +94,8 @@ Optional but recommended:
     ssh "<username>@<your_vm_ip>"
     ```
 
-># -> Confirm with "yes"
-># -> Enter password: ***********
+> -> Confirm with "yes"
+> -> Enter password: ***********
 
     ```bash
     logout
@@ -110,12 +110,12 @@ Optional but recommended:
     ```bash
     ssh-copy-id -i ~/.ssh/dso/dso_ed25519.pub "<username>@<your_vm_ip>"
     ```
-># -> Enter password: ***********
+> -> Enter password: ***********
 
     ```bash
     ssh -i ~/.ssh/dso/dso_ed25519 "<username>@<your_vm_ip>"
     ```
-># Check if everything is correct
+> Check if everything is correct
 
     ```bash
     ls -al ~/.ssh/
