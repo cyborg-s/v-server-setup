@@ -47,27 +47,27 @@ Optional but recommended:
 > Minimal steps to get SSH login running securely:
 
 1. **Generate SSH Key**  
-   ```bash
-   mkdir -p ~/.ssh/dso
-   ```
-   ```bash
-   ssh-keygen -t ed25519 -f ~/.ssh/dso/dso_ed25519
-   ```
+```bash
+mkdir -p ~/.ssh/dso
+```
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/dso/dso_ed25519
+```
 
 2. **Copy SSH key to server**  
-   ```bash
-   ssh-copy-id -i ~/.ssh/dso/dso_ed25519.pub <username>@<your_vm_ip>
-   ```
+```bash
+ssh-copy-id -i ~/.ssh/dso/dso_ed25519.pub "<username>@<your_vm_ip>"
+```
 
 3. **Initial login with password (only once)**  
-   ```bash
-   ssh <username>@<your_vm_ip>
-   ```
+```bash
+ssh "<username>@<your_vm_ip>"
+```
 
 4. **Login using SSH key**  
-   ```bash
-   ssh -i ~/.ssh/dso/dso_ed25519 <username>@<your_vm_ip>
-   ```
+```bash
+ssh -i ~/.ssh/dso/dso_ed25519 "<username>@<your_vm_ip>"
+```
 
 ---
 
@@ -75,13 +75,12 @@ Optional but recommended:
 > [!NOTE]
 > Generate a new SSH key for secure, passwordless authentication.
 
-    ```bash
-    mkdir -p ~/.ssh/dso
-    ```
-
-    ```bash
-    ssh-keygen -t ed25519
-    ```
+```bash
+mkdir -p ~/.ssh/dso
+```
+```bash
+ssh-keygen -t ed25519
+```
 > Target path: ~/.ssh/dso/dso_ed25519
 
 ---
@@ -90,16 +89,16 @@ Optional but recommended:
 > [!NOTE]
 > Login manually to initialize the SSH trust and test access.
 
-    ```bash
-    ssh "<username>@<your_vm_ip>"
-    ```
+```bash
+ssh "<username>@<your_vm_ip>"
+```
 
 > -> Confirm with "yes"
 > -> Enter password: ***********
 
-    ```bash
-    logout
-    ```
+```bash
+logout
+```
 
 ---
 
@@ -107,23 +106,23 @@ Optional but recommended:
 > [!NOTE]
 > Upload your public SSH key to the server to allow key-based login.
 
-    ```bash
-    ssh-copy-id -i ~/.ssh/dso/dso_ed25519.pub "<username>@<your_vm_ip>"
-    ```
+```bash
+ssh-copy-id -i ~/.ssh/dso/dso_ed25519.pub "<username>@<your_vm_ip>"
+```
 > -> Enter password: ***********
 
-    ```bash
-    ssh -i ~/.ssh/dso/dso_ed25519 "<username>@<your_vm_ip>"
-    ```
+```bash
+ssh -i ~/.ssh/dso/dso_ed25519 "<username>@<your_vm_ip>"
+```
 > Check if everything is correct
 
-    ```bash
-    ls -al ~/.ssh/
-    ```
+```bash
+ls -al ~/.ssh/
+```
 
-    ```bash
-    cat ~/.ssh/authorized_keys
-    ```
+```bash
+cat ~/.ssh/authorized_keys
+```
 
 ---
 
@@ -131,40 +130,38 @@ Optional but recommended:
 > [!NOTE]
 > Enhance server security by disabling password login completely.
 
-    ```bash
-    sudo nano /etc/ssh/sshd_config
-    ```
+```bash
+sudo nano /etc/ssh/sshd_config
+```
 > Change:
 > #PasswordAuthentication yes
 > to:
-    ```bash
-    PasswordAuthentication no
-    ```
+```bash
+PasswordAuthentication no
+```
 
-    ```bash
-    sudo systemctl restart ssh.service
-    ```
+```bash
+sudo systemctl restart ssh.service
+```
 
-    ```bash
-    logout
-    ```
+```bash
+logout
+```
 
 ### Test:
 
-    ```bash
-    ssh -i ~/.ssh/dso/dso_ed25519 "<username>@<your_vm_ip>"
-    ```
-> [!NOTE]
+```bash
+ssh -i ~/.ssh/dso/dso_ed25519 "<username>@<your_vm_ip>"
+```
 > should work
 
-    ```bash
-    logout
-    ```
+```bash
+logout
+```
 
-    ```bash
-    ssh -o PubKeyAuthentication=no "<username>@<your_vm_ip>"
-    ```
-> [!NOTE]
+```bash
+ssh -o PubKeyAuthentication=no "<username>@<your_vm_ip>"
+```
 > should fail
 
 
@@ -175,32 +172,32 @@ Optional but recommended:
 > Set up Nginx as a web server and prepare a custom index page. Also install Git for version control.
 
 **Update all packages**
-    ```bash
-    sudo apt update
-    ```
+```bash
+sudo apt update
+```
 
 **Install nginx**
-    ```bash
-    sudo apt install nginx -y
-    ```
+```bash
+sudo apt install nginx -y
+```
 
 **Install git**
-    ```bash
-    sudo apt install git -y
-    ```
+```bash
+sudo apt install git -y
+```
 
-    ```bash
-    systemctl status nginx
-    ```
+```bash
+systemctl status nginx
+```
 
 **Create directory and HTML file**
-    ```bash
-    sudo mkdir -p /var/www/html
-    ```
+```bash
+sudo mkdir -p /var/www/html
+```
 
-    ```bash
-    sudo touch /var/www/html/alternate-index.html
-    ```
+```bash
+sudo touch /var/www/html/alternate-index.html
+```
 
 ---
 
@@ -208,27 +205,27 @@ Optional but recommended:
 > [!NOTE]
 > Replace the default Nginx config to serve a custom HTML file.
 
-    ```bash
-    sudo nano /etc/nginx/sites-enabled/default
-    ```
+```bash
+sudo nano /etc/nginx/sites-enabled/default
+```
 
 **Edit content to:**
 
-    ```nginx
-    server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
+```nginx
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
 
-        root /var/www/html;
-        index alternate-index.html index.html index.nginx-debian.html;
+    root /var/www/html;
+    index alternate-index.html index.html index.nginx-debian.html;
 
-        server_name _;
+    server_name _;
 
-        location / {
-            try_files $uri $uri/ =404;
-        }
+    location / {
+        try_files $uri $uri/ =404;
     }
-    ```
+}
+```
 
 ---
 
@@ -236,23 +233,23 @@ Optional but recommended:
 > [!NOTE]
 > This file will be served when accessing the server via browser.
 
-    ```html
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Welcome by DSO</title>
-    </head>
-    <body>
-        <h1>Hello, Nginx!</h1>
-        <p>I have configured my Nginx Server on Ubuntu.</p>
-    </body>
-    </html>
-    ```
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome by DSO</title>
+</head>
+<body>
+    <h1>Hello, Nginx!</h1>
+    <p>I have configured my Nginx Server on Ubuntu.</p>
+</body>
+</html>
+```
 
-    ```bash
-    sudo service nginx restart
-    ```
+```bash
+sudo service nginx restart
+```
 
 ---
 
@@ -260,9 +257,9 @@ Optional but recommended:
 > [!NOTE]
 > Access the server’s IP to confirm Nginx is working.
 
-    ```
-    http://<your_vm_ip>
-    ```
+```
+http://<your_vm_ip>
+```
 
 ---
 
@@ -270,17 +267,17 @@ Optional but recommended:
 > [!NOTE]
 > Set Git user info and upload a new SSH key to GitHub for secure repo access.
 
-    ```bash
-    git config --global user.name "<your_github_name"
-    ```
+```bash
+git config --global user.name "<your_github_name"
+```
 
-    ```bash
-    git config --global user.email "<your_github_email>"
-    ```
+```bash
+git config --global user.email "<your_github_email>"
+```
 
-    ```bash
-    ssh-keygen -t ed25519 -C "<your_email>"
-    ```
+```bash
+ssh-keygen -t ed25519 -C "<your_email>"
+```
 > Target path: ~/.ssh/git/git_ed25519
 
 > [!NOTE]
