@@ -11,15 +11,16 @@ Ideal as a starting point for personal server projects or for reuse in similar s
 
 - [Prerequisites](#prerequisites)
 - [Quickstart](#quickstart)
-- [1. Create SSH Key](#1-create-ssh-key)
-- [2. First login to the server with password](#2-first-login-to-the-server-with-password)
-- [3. Add SSH key using `ssh-copy-id`](#3-add-ssh-key-using-ssh-copy-id)
-- [4. Disable password authentication](#4-disable-password-authentication)
-- [5. Install & configure Nginx & Git](#5-install--configure-nginx--git)
-  - [Adjust Nginx configuration](#adjust-nginx-configuration)
-  - [Example HTML file](#example-html-file-alternate-indexhtml)
-- [6. Verify in browser](#6-verify-in-browser)
-- [7. Configure Git and add SSH key to GitHub](#7-configure-git-and-add-ssh-key-to-github)
+  - [1. Create SSH Key](#1-create-ssh-key)
+  - [2. First login to the server with password](#2-first-login-to-the-server-with-password)
+  - [3. Add SSH key using `ssh-copy-id`](#3-add-ssh-key-using-ssh-copy-id)
+  - [4. Disable password authentication](#4-disable-password-authentication)
+- [Usage](#usage)
+  - [5. Install & configure Nginx & Git](#5-install--configure-nginx--git)
+    - [Adjust Nginx configuration](#adjust-nginx-configuration)
+    - [Example HTML file](#example-html-file-alternate-indexhtml)
+  - [6. Verify in browser](#6-verify-in-browser)
+  - [7. Configure Git and add SSH key to GitHub](#7-configure-git-and-add-ssh-key-to-github)
 
 ---
 
@@ -42,7 +43,7 @@ Optional but recommended:
 
 ---
 
-## Quickstart
+# Quickstart
 > [!NOTE]
 > Minimal steps to get SSH login running securely:
 
@@ -166,6 +167,8 @@ ssh -o PubKeyAuthentication=no "<username>@<your_vm_ip>"
 
 
 ---
+# Usage
+---
 
 ## 5. Install & configure Nginx & Git, and set up an alternative HTML page
 > [!NOTE]
@@ -268,7 +271,7 @@ http://<your_vm_ip>
 > Set Git user info and upload a new SSH key to GitHub for secure repo access.
 
 ```bash
-git config --global user.name "<your_github_name"
+git config --global user.name "<your_github_name>"
 ```
 
 ```bash
